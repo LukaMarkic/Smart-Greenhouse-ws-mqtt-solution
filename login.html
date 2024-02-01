@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kalam&display=swap");
+
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        padding: 0;
+      }
+
+      .navigaion {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 36px;
+        align-items: center;
+        background-color: #dcfbde;
+        display: flex;
+        align-items: center;
+      }
+
+      .navigaion h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 32px;
+
+        font-weight: 400;
+        font-family: "Kalam", cursive;
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Roboto+Flex:opsz@8..144&display=swap");
+
+      main {
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: #184a00;
+        position: relative;
+        height: inherit;
+      }
+
+      #login-cover-img {
+        height: 100%;
+      }
+
+      .credidential-container {
+        padding: 50px 80px;
+        width: 440px;
+        height: 480px;
+        flex-shrink: 0;
+        border-radius: 14px;
+        border: 1px solid #dad5d5;
+        background: #fff;
+        position: absolute;
+        left: calc(15% - 20px);
+      }
+
+      .credidential-container h2 {
+        font-family: "Roboto Flex", sans-serif;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.36px;
+        margin: 0;
+        margin-bottom: 67px;
+      }
+
+      .credidential-container > form > div:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        margin-bottom: 80px;
+      }
+
+      .credidential-container-input-continer {
+        display: flex;
+        flex-direction: column;
+        font-family: Inter;
+        gap: 9px;
+      }
+
+      .credidential-container-input-continer label {
+        color: #718096;
+        font-feature-settings: "clig" off, "liga" off;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.154px;
+      }
+
+      .credidential-container-input-continer > div {
+        display: inline-flex;
+        padding: 7px 0px 8px 10px;
+        align-items: center;
+        border-radius: 12px;
+        border: 1px solid #cbd5e0;
+        width: calc(100% - 7px);
+        background: #f7fafc;
+
+        /* Inner Shadow/Default */
+        box-shadow: 0px 2px 0px 0px rgba(231, 235, 238, 0.2) inset;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .credidential-container-input-continer > div input {
+        outline: none !important;
+        background: transparent;
+        border: none;
+        color: #4a5568;
+        font-feature-settings: "clig" off, "liga" off;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: -0.154px;
+        width: 350px;
+      }
+
+      #toggle-password {
+        padding: 0px 16px 0px 13px;
+        border-left: 1px solid #4a5568;
+      }
+      #toggle-password > img {
+        height: 24px;
+      }
+
+      #toggle-password .seen-img {
+        display: block;
+      }
+
+      #toggle-password .seen-hover-img {
+        display: none;
+      }
+
+      #toggle-password:hover {
+        cursor: pointer;
+      }
+      #toggle-password:hover .seen-img {
+        display: none;
+      }
+
+      #toggle-password:hover .seen-hover-img {
+        display: block;
+      }
+
+      .credidential-container-input-continer > div img:nth-child(1):hover {
+        color: #184a00;
+        cursor: pointer;
+      }
+
+      #login-button {
+        width: 100%;
+        background-color: #1c4532;
+        border-radius: 20px;
+        padding: 10px 24px;
+        color: #f7fafc;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 28px;
+        margin: 0;
+      }
+
+      #login-button:hover {
+        cursor: pointer;
+        transition: 450ms;
+        background-color: #048146;
+      }
+
+      #login-button:not(:hover) {
+        transition: 450ms;
+        background-color: #1c4532;
+      }
+
+      @media (max-width: 750px) {
+        body {
+          min-width: 750px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navigaion">
+      <h1>Smart Greenhouse</h1>
+    </nav>
+    <main>
+      <div class="credidential-container">
+        <h2>PRIJAVA KORISNIKA</h2>
+        <form id="creditental-form">
+          <div>
+            <div class="credidential-container-input-continer">
+              <label>Username</label>
+              <div>
+                <input
+                  type="text"
+                  id="username-input"
+                  placeholder="korisnik123"
+                />
+              </div>
+            </div>
+            <div class="credidential-container-input-continer">
+              <label>Zaporka</label>
+              <div>
+                <input type="password" id="password-input" />
+                <div id="toggle-password">
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fpassword-seen-icon.svg?alt=media&token=559241aa-ed68-4629-9364-fde8a19143a8"
+                    class="seen-img"
+                  />
+                  <img
+                    src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fpassword-seen-icon-hover.svg?alt=media&token=c6e068f8-c946-4637-b857-cfefe407751f"
+                    class="seen-hover-img"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" onclick="submitForm()" id="login-button">
+            Prijavi se
+          </button>
+        </form>
+      </div>
+      <img
+        id="login-cover-img"
+        src="https://i.ibb.co/23t0ZCs/greenhouse-cover-image.jpg"
+      />
+    </main>
+    <script>
+      const hostname = "localhost";
+      const wsAddress = `ws://${hostname}:8888/ws`;
+      var socket = new WebSocket(wsAddress);
+
+      // Event handler for WebSocket connection opened
+      socket.addEventListener("open", function (event) {
+        console.log("WebSocket connection opened");
+      });
+
+      // Event handler for WebSocket connection closed
+      socket.addEventListener("close", function (event) {
+        console.log("WebSocket connection closed");
+      });
+
+      socket.onmessage = function (event) {
+        var message = JSON.parse(event.data);
+        console.log(message);
+        if (message.type === "redirect") {
+          window.location.href = `http://${hostname}:8888` + message.data.url;
+        }
+      };
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var passwordInput = document.getElementById("password-input");
+        var togglePasswordBtn = document.getElementById("toggle-password");
+
+        togglePasswordBtn.addEventListener("click", function () {
+          passwordInput.type =
+            passwordInput.type === "password" ? "text" : "password";
+        });
+      });
+
+      function submitForm() {
+        var username = document.getElementById("username-input").value;
+        var password = document.getElementById("password-input").value;
+
+        var loginData = {
+          type: "login_data",
+          data: {
+            username: username,
+            password: password,
+          },
+        };
+
+        var loginJsonData = JSON.stringify(loginData);
+        socket.send(loginJsonData);
+      }
+    </script>
+  </body>
+</html>
