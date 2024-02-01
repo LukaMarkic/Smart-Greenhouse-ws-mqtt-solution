@@ -1,0 +1,1823 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kalam&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        padding: 0;
+      }
+
+      .navigaion {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 36px;
+        align-items: center;
+        background-color: #dcfbde;
+        display: flex;
+        align-items: center;
+      }
+
+      .navigaion > div {
+        display: flex;
+        gap: 23px;
+      }
+      .navigaion > div .notification-img {
+        width: 18px;
+        height: 20.28px;
+      }
+
+      .navigaion > div .profile-img {
+        width: 40px;
+      }
+
+      .navigaion h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 32px;
+
+        font-weight: 400;
+        font-family: "Kalam", cursive;
+      }
+
+      .switch {
+        margin-left: 5px;
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #0aa415;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      body {
+        background: #f7f7f7;
+      }
+
+      main {
+        padding-top: 35px;
+        width: 940px;
+        margin-left: calc(50% - 940px / 2);
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .br14-white {
+        border-radius: 14px;
+        background: #fff;
+      }
+
+      .br8-white-light-grey {
+        border-radius: 8px;
+        border: 1px solid #d8f9e3;
+        background: #fefefe;
+      }
+
+      .meto-stat-bar {
+        padding: 12px 4px;
+        width: calc(100% - 8px);
+        display: flex;
+        justify-content: center;
+        gap: 170px;
+      }
+
+      .meto-stat-component {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .meto-stat-component h3,
+      p {
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+      }
+
+      .meto-stat-component-icon {
+        height: 34px;
+      }
+
+      .system-components-status-container {
+        padding: 22px 65px 56px;
+        display: flex;
+        flex-direction: column;
+        gap: 27px;
+      }
+      .system-components-status-container > h2 {
+        font-family: Roboto;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.2px;
+      }
+
+      .system-components-status-container > div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .system-component {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: calc(185px - 16.6px);
+        padding: 13px 8px 34px;
+      }
+      .system-component .system-component-img {
+        height: 82px;
+        margin-bottom: 13px;
+        display: none;
+        transition: opacity 0.4s ease-in-out;
+      }
+
+      .system-component > h3 {
+        color: #706666;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.16px;
+        transition: 0.5ms;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .system-component .system-component-value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 11px;
+        margin-top: 12px;
+        height: 22px;
+        opacity: 0;
+      }
+      .system-component .system-component-value input {
+        max-width: 60px;
+        text-align: right;
+        width: auto;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #18864a;
+        font-family: Roboto;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 22px;
+        letter-spacing: 0.16px;
+      }
+
+      .system-component .system-component-value input:focus {
+        border-bottom: 1px solid #707974;
+      }
+
+      .system-component .system-component-value img {
+        cursor: pointer;
+        height: 22px;
+      }
+
+      .system-component .switch {
+        margin-top: 24px;
+      }
+
+      #furnace-img-off,
+      #windows-closed-img,
+      #blinds-closed-img {
+        opacity: 1;
+        display: block;
+      }
+
+      .part {
+        border: 8px solid black;
+        position: relative;
+        border-radius: 50%;
+        width: 66px;
+        height: 66px;
+        margin-bottom: 13px;
+      }
+
+      .fan-box {
+        width: 52.8px;
+        height: 52.8px;
+        border-radius: 50%;
+        text-align: center;
+        position: absolute;
+        left: 6.6px;
+        top: 6.6px;
+      }
+
+      @keyframes rotateon {
+        100% {
+          transform: rotateZ(360deg);
+        }
+      }
+
+      @keyframes rotateoff {
+        100% {
+          transform: rotateZ(360deg);
+        }
+      }
+
+      .fan-box1 {
+        position: absolute;
+        width: 18px;
+        height: 18x;
+        background-color: black;
+        top: 50%;
+        border-radius: 50%;
+        box-shadow: 0px 0px 20px 1px rgb(236, 8, 8);
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #profile-icon {
+        position: relative;
+        cursor: pointer;
+      }
+
+      #profile-window {
+        position: absolute;
+        top: 60px;
+        z-index: 3;
+        right: 0;
+        margin-right: 5px;
+        padding: 12px 18px;
+        padding-top: 24px;
+        background-color: #fdfdfd;
+        border-radius: 2px;
+        border: 1px solid #bcddc6;
+        box-shadow: 0 2px 5px rgba(50, 51, 50, 0.1);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        display: none;
+      }
+
+      #profile-window p {
+        color: #706666;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+      }
+
+      #profile-window button {
+        cursor: pointer;
+        border: none;
+        background-color: #bcddc6;
+        color: #363837;
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 5px;
+        margin-top: 24px;
+        min-width: 200px;
+      }
+
+      #profile-window #profile-fullname {
+        font-size: 20px;
+        font-weight: 500;
+        color: #373837;
+      }
+
+      #profile-window button:hover {
+        transition: 380ms;
+        color: #ffffff;
+        background-color: #19632f;
+      }
+
+      #profile-window button:not(:hover) {
+        transition: 380ms;
+      }
+
+      #profile-window::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        right: 36px;
+        transform: translateX(-25%) rotate(180deg);
+        border-width: 10px 10px 0 10px;
+        border-style: solid;
+        z-index: 2;
+        border-color: #bcddc6 transparent transparent transparent;
+      }
+
+      #notification-icon {
+        cursor: pointer;
+      }
+
+      #notification-window {
+        position: absolute;
+        top: 52px;
+        z-index: 3;
+        right: 0;
+        margin-right: 56.4px;
+        padding: 12px 18px;
+        padding-right: 36px;
+        padding-top: 24px;
+        background-color: #fdfdfd;
+        border-radius: 2px;
+        border: 1px solid #bcddc6;
+        box-shadow: 0 8px 5px rgba(50, 51, 50, 0.1);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+        display: none;
+        max-height: 500px;
+        width: 450px;
+      }
+
+      #notification-window::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        right: 36px;
+        transform: translateX(-25%) rotate(180deg);
+        border-width: 10px 10px 0 10px;
+        border-style: solid;
+        z-index: 2;
+        border-color: #bcddc6 transparent transparent transparent;
+      }
+
+      #notification-window h3 {
+        color: #212121;
+        font-family: "Roboto", sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        text-align: start;
+        font-weight: 500;
+        margin-left: 8px;
+      }
+
+      #notification-message-container {
+        overflow-y: auto;
+      }
+
+      #no-notification-message {
+        color: #484848;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        text-align: start;
+        font-weight: 400;
+        display: none;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+
+      #notification-window-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      #clean-notifications-btn {
+        cursor: pointer;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        border: none;
+        color: #000000;
+        font-weight: 500;
+        background-color: rgb(255, 211, 211);
+        padding: 6px 12px;
+        border-radius: 8px;
+        margin-right: -18px;
+      }
+
+      #clean-notifications-btn:hover {
+        transition: 350ms;
+        color: #ffffff;
+        background-color: rgb(183, 0, 0);
+      }
+
+      #clean-notifications-btn:not(:hover) {
+        transition: 350ms;
+      }
+
+      .defined-system-settings-container {
+        padding: 20px 65px 30px;
+      }
+      .defined-system-settings-container > h2,
+      .data-reading-settings-container > h2 {
+        font-family: Roboto;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0.2px;
+        margin-bottom: 24px;
+      }
+      .defined-system-settings-container > div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .defined-system-settings-component {
+        padding: 12px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        width: 210px;
+      }
+      .defined-system-settings-component > div {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
+
+      .defined-system-settings-container > div img {
+        height: 16px;
+      }
+
+      .defined-system-settings-container > div h3 {
+        padding-top: 3px;
+        color: #000;
+        font-family: "Roboto", sans-serif;
+        font-size: 15.2px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0.5px;
+      }
+
+      .data-reading-settings-container {
+        padding: 20px 65px 30px;
+      }
+
+      .data-reading-settings-container > div {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .data-reading-settings-container > h2 {
+        margin-bottom: 35px;
+      }
+
+      .setting-input-continer {
+        display: flex;
+        justify-content: space-between;
+        width: 100px;
+        background-color: #ffffff;
+        border: 1px solid #d0d4d9;
+        padding: 4px 12px;
+        border-radius: 12px;
+      }
+
+      .setting-input-continer input {
+        max-width: 60px;
+        text-align: left;
+        width: auto;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #4e5451;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0.16px;
+        padding-top: 2px;
+      }
+
+      .setting-input-continer input:focus {
+        border-bottom: 1px solid #707974;
+      }
+
+      #edit-temperature-setting-value-img,
+      #edit-humidity-setting-value-img,
+      #edit-light-setting-value-img {
+        cursor: pointer;
+        height: 22px;
+      }
+
+      #notification-message-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 10px;
+        padding: 8px;
+        width: 100%;
+      }
+
+      .notification-message {
+        border-radius: 5px;
+        background-color: #fefffe;
+        border: 1px solid #e2facf;
+        padding: 8px 10px;
+      }
+
+      .notification-message > p {
+        color: #4d4c4c;
+        font-family: "Roboto", sans-serif;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        margin-top: 5px;
+      }
+
+      .notification-message .notification-message-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+      }
+
+      .notification-message .notification-message-header h4 {
+        color: #212121;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+
+      .notification-message .notification-message-header p {
+        color: #9c9c9c;
+        font-family: "Roboto", sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 12px;
+        margin-top: 2px;
+      }
+
+      #red-dot {
+        width: 2px;
+        height: 2px;
+        background-color: red;
+        border-radius: 50%;
+      }
+
+      .navigation-right-icons {
+        display: flex;
+        align-items: center;
+      }
+
+      .data-reading-settings-container-input-container {
+        display: flex;
+        justify-content: start;
+        gap: 120px;
+      }
+
+      .data-reading-settings-container-input-container .filter-section {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .data-reading-settings-container-input-container .filter-section label {
+        color: #101010;
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .data-reading-settings-container-input-container .filter-section select {
+        display: flex;
+        justify-content: space-between;
+        width: 152px;
+        background-color: #ffffff;
+        border: 1px solid #d0d4d9;
+        padding: 4px 4px;
+        border-radius: 5px;
+        text-align: left;
+        background: transparent;
+        color: #434343;
+        font-family: Roboto;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0.16px;
+        padding-top: 2px;
+      }
+
+      input[type="date"] {
+        border: none;
+        outline: none;
+        width: 142.08px;
+        background-color: #ffffff;
+        border: 1px solid #d0d4d9;
+        padding: 2px 4px;
+        border-radius: 5px;
+        text-align: left;
+        background: transparent;
+        color: #434343;
+        font-family: Roboto;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0.16px;
+      }
+
+      #data-read-table-container {
+        min-height: 480px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.16px;
+      }
+
+      #data-read-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      #data-read-table th,
+      #data-read-table td {
+        border: 1px solid #ebe8e8;
+        padding: 8px;
+        text-align: left;
+        color: #363636;
+        font-size: 14px;
+      }
+
+      #data-read-table th {
+        background-color: #e6f7e1;
+        color: #2c2c2c;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      #pagination {
+        margin-top: -20px;
+        display: flex;
+        justify-content: space-between;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.16px;
+      }
+
+      .pagination-btn {
+        padding: 5px;
+        border: 1px solid #b0adad;
+        background-color: #f7fffa;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 5px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.16px;
+        font-size: 15px;
+        color: #444141;
+        width: 70px;
+      }
+
+      .pagination-btn:hover {
+        transition: 450ms;
+        background-color: #c2ffd8;
+      }
+
+      #download-section-contianer {
+        display: flex;
+        justify-content: start;
+        gap: 4px;
+        align-items: center;
+        display: none;
+      }
+
+      #download-file-anchor {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15.2px;
+        line-height: 16px;
+        margin: 0;
+        padding: 0;
+      }
+
+      #download-section-contianer > p {
+        font-size: 15.2px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navigaion">
+      <h1>Smart Greenhouse</h1>
+      <div class="navigation-right-icons">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fnotification_default.png?alt=media&token=bce64cda-b93e-456b-8a05-15d55cd61dcc"
+          class="notification-img"
+          id="notification-icon"
+        />
+        <img
+          id="profile-icon"
+          src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fprofile_logo.png?alt=media&token=5b51ec3d-bb89-4b75-8d7c-99d5799fa2df"
+          class="profile-img"
+        />
+      </div>
+      <div id="notification-window">
+        <div id="notification-window-header">
+          <h3>Obavjesti</h3>
+          <button id="clean-notifications-btn">Obriši</button>
+        </div>
+        <p id="no-notification-message">Nema obavijesti.</p>
+        <div id="notification-message-container"></div>
+      </div>
+      <div id="profile-window">
+        <p id="profile-username">{{ username }}</p>
+        <p id="profile-fullname">{{ fullname }}</p>
+        <button id="logout-btn">Odjava</button>
+      </div>
+    </nav>
+    <main>
+      <div class="meto-stat-bar br14-white">
+        <div class="meto-stat-component">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Ftemperature-measurment-icon.png?alt=media&token=8b3dac86-21a7-4625-8e28-aef99c7ea2ac"
+            class="meto-stat-component-icon"
+          />
+          <div>
+            <h3>Temperatura</h3>
+            <p id="temperature-stat-value">N/A</p>
+          </div>
+        </div>
+        <div class="meto-stat-component">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fmoisture-humidity-icon.png?alt=media&token=e24c1ed8-0084-4e98-856d-d9186d68095e"
+            class="meto-stat-component-icon"
+          />
+          <div>
+            <h3>Razina vlage</h3>
+            <p id="moisture-stat-value">N/A</p>
+          </div>
+        </div>
+        <div class="meto-stat-component">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fsun-logo-icon.png?alt=media&token=bfe76986-d687-417a-8b18-4f252f4d65a2"
+            class="meto-stat-component-icon"
+          />
+          <div>
+            <h3>Osvjetljenost</h3>
+            <p id="lightlevel-stat-value">N/A</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="system-components-status-container br14-white">
+        <h2>Stanje komponenti</h2>
+        <div>
+          <div class="system-component br8-white-light-grey">
+            <div class="part">
+              <div class="fan-box">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/95/95252.png"
+                  width="100%"
+                  height="100%"
+                />
+                <div class="fan-box1"></div>
+              </div>
+            </div>
+            <h3 id="fan-status-msg">Ventolator isključen</h3>
+            <div class="system-component-value"></div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-fan-status-switch" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="system-component br8-white-light-grey">
+            <div>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Ffurnace-icon-logo-turn-off.png?alt=media&token=ecf1f427-da07-48c2-8d47-53ca49a4edbc"
+                class="system-component-img system-component-img-default"
+                id="furnace-img-off"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Ffurnace-icon-logo-turn-on.png?alt=media&token=7ecf13a7-5640-4d08-b01c-fdd3cc2e71dc"
+                class="system-component-img"
+                id="furnace-img-on"
+              />
+            </div>
+            <h3 id="furnace-status-msg">Peć je isključena</h3>
+            <div class="system-component-value"></div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-furnace-status-switch" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="system-component br8-white-light-grey">
+            <div>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fwindow-closed-icon.png?alt=media&token=420781e3-219d-439d-887b-191ad841edf0"
+                class="system-component-img system-component-img-default"
+                id="windows-closed-img"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fwindow-open-icon.png?alt=media&token=662fced3-2754-433b-8873-6b77875b2df4"
+                class="system-component-img"
+                id="windows-open-img"
+              />
+            </div>
+            <h3 id="widndow-status-msg">Prostorija je zatvorena</h3>
+            <div class="system-component-value" id="system-window-component">
+              <input type="text" id="widndow-status-value" value="100%" />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fedit-system-componet-value-icon.svg?alt=media&token=e1f4f70b-de0b-4691-9513-0c124574082d"
+                id="edit-window-componet-value-img"
+              />
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-window-status-switch" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="system-component br8-white-light-grey">
+            <div>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fblinds-closed-icon.png?alt=media&token=a8021fd0-d80a-4eb1-a3d2-74337abe818c"
+                class="system-component-img system-component-img-default"
+                id="blinds-closed-img"
+              />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fblinds-open-icon.png?alt=media&token=2232b9cd-cb58-4e6d-a9ca-abf5bbe76090"
+                class="system-component-img"
+                id="blinds-open-img"
+              />
+            </div>
+            <h3 id="blinds-status-msg">Roletne su spuštene</h3>
+            <div class="system-component-value" id="system-blinds-component">
+              <input type="text" id="blinds-status-open-value" value="100%" />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fedit-system-componet-value-icon.svg?alt=media&token=e1f4f70b-de0b-4691-9513-0c124574082d"
+                id="edit-blinds-componet-value-img"
+              />
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-blinds-status-switch" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="defined-system-settings-container br14-white">
+        <h2>Postavke sustava</h2>
+        <div>
+          <div class="defined-system-settings-component br8-white-light-grey">
+            <div>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fellipse_red.svg?alt=media&token=715f5cc9-2cb4-4fae-a7f4-ad998f299236"
+              />
+              <h3>Željena temperatura</h3>
+            </div>
+            <div class="setting-input-continer">
+              <input type="text" id="temperature-setting-value" value="12 °C" />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fedit-system-componet-value-icon.svg?alt=media&token=e1f4f70b-de0b-4691-9513-0c124574082d"
+                id="edit-temperature-setting-value-img"
+              />
+            </div>
+          </div>
+          <div class="defined-system-settings-component br8-white-light-grey">
+            <div>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fellipse_grey.svg?alt=media&token=e62977d0-9bbe-4676-ae4d-4eb18fb297c4"
+              />
+              <h3>Željena razina vlage</h3>
+            </div>
+            <div class="setting-input-continer">
+              <input type="text" id="humidity-setting-value" value="100%" />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fedit-system-componet-value-icon.svg?alt=media&token=e1f4f70b-de0b-4691-9513-0c124574082d"
+                id="edit-humidity-setting-value-img"
+              />
+            </div>
+          </div>
+          <div class="defined-system-settings-component br8-white-light-grey">
+            <div>
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fellipse_yellow.svg?alt=media&token=53d8651e-9414-4760-adb7-c13a4b78e5cf"
+              />
+              <h3>Željena razina svjetlosti</h3>
+            </div>
+            <div class="setting-input-continer">
+              <input type="text" id="light-setting-value" value="95%" />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fedit-system-componet-value-icon.svg?alt=media&token=e1f4f70b-de0b-4691-9513-0c124574082d"
+                id="edit-light-setting-value-img"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="data-reading-settings-container br14-white">
+        <h2>Povijest očitanja</h2>
+        <div>
+          <div class="data-reading-settings-container-input-container">
+            <div class="filter-section">
+              <label for="sensor-type-data-reading">Očitanje</label>
+              <select id="sensor-type-data-reading">
+                <option value="" disabled selected hidden>odaberi</option>
+                <option value="data/temperature">Temperatura</option>
+                <option value="data/humidity">Vlažnost</option>
+                <option value="data/light">Osvijetlost</option>
+              </select>
+            </div>
+            <div class="filter-section">
+              <label for="time-span">Datum</label>
+              <select id="time-span">
+                <option value="" disabled selected hidden>odaberi</option>
+                <option value="today">Danas</option>
+                <option value="lastDay">Prethosni dan</option>
+                <option value="lastWeek">Prethodni tijedan</option>
+                <option value="lastMonth">Prethodni mjesec</option>
+                <option value="allTime">Sveukupno</option>
+                <option value="specificDate">Određeni datum</option>
+              </select>
+
+              <div id="specific-date-container" style="display: none">
+                <input type="date" id="specific-date" min="2023-01-01" />
+              </div>
+            </div>
+          </div>
+          <div id="data-read-table-container">
+            <table id="data-read-table">
+              <thead>
+                <tr>
+                  <th>Datum</th>
+                  <th>Vrijeme</th>
+                  <th>Vrijednost</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+          <div id="pagination">
+            <div>
+              <button class="pagination-btn" id="pagination-prev-btn">
+                Nazad
+              </button>
+              <button class="pagination-btn" id="pagination-next-btn">
+                Naprijed
+              </button>
+            </div>
+            <span id="page-info"></span>
+          </div>
+          <div id="download-section-contianer">
+            <p>Preuzmite podatke</p>
+            <a id="download-file-anchor">ovdje</a>
+          </div>
+        </div>
+      </div>
+      <br />
+    </main>
+    <script>
+      var displayDatabseDataType;
+      var currentPage = 0;
+      var recordsPerPage = 12;
+      var readedDataFromDatabase;
+
+      const sensorTypeDataReading = document.getElementById(
+        "sensor-type-data-reading"
+      );
+      const timeSpan = document.getElementById("time-span");
+      const timeSpanSpecificDate = document.getElementById("specific-date");
+
+      sensorTypeDataReading.addEventListener("change", () => {
+        if (timeSpan.value != "") {
+          displayDatabseDataType = sensorTypeDataReading.value.split("/")[1];
+          currentPage = 0;
+          if (timeSpan.value === "specificDate") {
+            sendDatabaseRequest(
+              sensorTypeDataReading.value,
+              timeSpanSpecificDate.value
+            );
+          } else {
+            sendDatabaseRequest(sensorTypeDataReading.value, timeSpan.value);
+          }
+        }
+      });
+
+      timeSpan.addEventListener("change", () => {
+        if (sensorTypeDataReading.value != "") {
+          displayDatabseDataType = sensorTypeDataReading.value.split("/")[1];
+          currentPage = 0;
+          if (timeSpan.value === "specificDate") {
+            sendDatabaseRequest(
+              sensorTypeDataReading.value,
+              timeSpanSpecificDate.value
+            );
+          } else {
+            sendDatabaseRequest(sensorTypeDataReading.value, timeSpan.value);
+          }
+        }
+      });
+
+      timeSpanSpecificDate.addEventListener("change", () => {
+        if (sensorTypeDataReading.value != "") {
+          displayDatabseDataType = sensorTypeDataReading.value.split("/")[1];
+          currentPage = 0;
+          console.log(displayDatabseDataType);
+          sendDatabaseRequest(
+            sensorTypeDataReading.value,
+            timeSpanSpecificDate.value
+          );
+        }
+      });
+
+      // Variables for pagination
+
+      // Function to display records based on the current page
+      function displayRecords() {
+        var tableBody = document.getElementById("table-body");
+        tableBody.innerHTML = "";
+
+        var startIndex = currentPage * recordsPerPage;
+        var endIndex = startIndex + recordsPerPage;
+
+        if (readedDataFromDatabase.length === 0) {
+          const messageElemement = document.createElement("p");
+          messageElemement.innerText =
+            "Za navedni odabir nije moguće pronaći ili ne postoje podaci u bazi podataka.";
+          tableBody.appendChild(messageElemement);
+          updatePageInfo();
+          return;
+        }
+
+        for (
+          var i = startIndex;
+          i < endIndex && i < readedDataFromDatabase.length;
+          i++
+        ) {
+          var row = document.createElement("tr");
+          row.innerHTML = `<td>${readedDataFromDatabase[i].date}</td>
+                              <td>${readedDataFromDatabase[i].time}</td>
+                              <td>${
+                                readedDataFromDatabase[i][
+                                  displayDatabseDataType
+                                ]
+                              }${
+            displayDatabseDataType === "temperature" ? " °C" : "%"
+          }</td>`;
+          tableBody.appendChild(row);
+        }
+
+        updatePageInfo();
+      }
+
+      document
+        .getElementById("pagination-prev-btn")
+        .addEventListener("click", showPreviousRecords);
+      document
+        .getElementById("pagination-next-btn")
+        .addEventListener("click", showNextRecords);
+      // Function to show the previous set of records
+      function showPreviousRecords() {
+        if (currentPage > 0) {
+          currentPage--;
+          displayRecords();
+        }
+      }
+
+      // Function to show the next set of records
+      function showNextRecords() {
+        var totalPages = Math.ceil(
+          readedDataFromDatabase.length / recordsPerPage
+        );
+        if (currentPage < totalPages - 1) {
+          currentPage++;
+          displayRecords();
+        }
+      }
+
+      // Function to update page information
+      function updatePageInfo() {
+        var totalPages = Math.ceil(
+          readedDataFromDatabase.length / recordsPerPage
+        );
+        var pageInfo = document.getElementById("page-info");
+        pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+      }
+
+      // Initial display
+      displayRecords();
+
+      function downloadJSON(jsonData, name) {
+        const downloadContianer = document.getElementById(
+          "download-section-contianer"
+        );
+        const jsonString = JSON.stringify(jsonData, null, 2);
+        const blob = new Blob([jsonString], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        // Create a link element, set its attributes, and trigger a click event
+        const a = document.getElementById("download-file-anchor");
+        a.href = url;
+        a.download = name + "Data.json";
+        downloadContianer.style.display = "flex";
+      }
+    </script>
+    <script>
+      const timeSpanSelect = document.getElementById("time-span");
+      const specificDateContainer = document.getElementById(
+        "specific-date-container"
+      );
+
+      timeSpanSelect.addEventListener("change", () => {
+        if (timeSpanSelect.value === "specificDate") {
+          specificDateContainer.style.display = "block";
+        } else {
+          specificDateContainer.style.display = "none";
+        }
+      });
+    </script>
+    <script>
+      const hostname = "localhost";
+      const wsAddress = `ws://${hostname}:8888/ws`;
+      var socket = new WebSocket(wsAddress);
+
+      // Event handler for WebSocket connection opened
+      socket.addEventListener("open", function (event) {
+        console.log("WebSocket connection opened");
+      });
+
+      // Event handler for WebSocket messages received
+      socket.addEventListener("message", function (event) {
+        console.log("Message from server:", event.data);
+
+        try {
+          var msg_data = JSON.parse(event.data);
+
+          if (msg_data.type === "sensors_data") {
+            if (msg_data.data.topic === "data/temperature") {
+              document.getElementById("temperature-stat-value").innerText =
+                msg_data.data.payload + " °C";
+            } else if (msg_data.data.topic === "data/humidity") {
+              document.getElementById("moisture-stat-value").innerText =
+                msg_data.data.payload + " %";
+            } else if (msg_data.data.topic === "data/light") {
+              document.getElementById("lightlevel-stat-value").innerText =
+                msg_data.data.payload + " %";
+            }
+          } else if (msg_data.type === "redirect") {
+            window.location.href =
+              `http://${hostname}:8888` + msg_data.data.url;
+          } else if (msg_data.type === "notification_message") {
+            addNewNotificationElement(msg_data.data);
+          } else if (msg_data.type === "database_requested_data") {
+            console.log(msg_data["payload"]);
+            readedDataFromDatabase = msg_data["payload"];
+            displayRecords();
+            downloadJSON(msg_data["payload"], displayDatabseDataType);
+          }
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+        }
+      });
+
+      // Event handler for WebSocket connection closed
+      socket.addEventListener("close", function (event) {
+        console.log("WebSocket connection closed");
+      });
+
+      function sendMqttMessage(topic, payload) {
+        var mqqtData = {
+          type: "mqtt_command",
+          data: {
+            topic: topic,
+            payload: payload,
+          },
+        };
+        // Convert JSON object to string
+        var jsonMQTTData = JSON.stringify(mqqtData);
+        // Send a message to deactivate the light
+        socket.send(jsonMQTTData);
+      }
+
+      function sendSettingsMessage(setting, payload) {
+        var settingData = {
+          type: "setting_command",
+          data: {
+            setting: setting,
+            payload: payload,
+          },
+        };
+        // Convert JSON object to string
+        var jsonSettingData = JSON.stringify(settingData);
+        // Send a message to deactivate the light
+        socket.send(jsonSettingData);
+      }
+
+      function sendMQTTMessageFromToggle(
+        checkInputId,
+        topic,
+        payloadChechedValue,
+        payloadUncheckedValue
+      ) {
+        let checkInput = document.getElementById(checkInputId);
+        checkInput.addEventListener("change", function () {
+          let payload;
+          if (this.checked) {
+            payload = payloadChechedValue;
+          } else {
+            payload = payloadUncheckedValue;
+          }
+          sendMqttMessage(topic, payload);
+        });
+      }
+
+      function sendMQTTMessageFromToggleWithValue(
+        checkInputId,
+        topic,
+        payloadChechedValueElementId,
+        payloadUncheckedValue
+      ) {
+        let checkInput = document.getElementById(checkInputId);
+        let payloadChechedValueElement = document.getElementById(
+          payloadChechedValueElementId
+        );
+
+        checkInput.addEventListener("change", function () {
+          let payloadChechedValue = payloadChechedValueElement.value.replace(
+            "%",
+            ""
+          );
+          let payload;
+          if (this.checked) {
+            payload = payloadChechedValue;
+          } else {
+            payload = payloadUncheckedValue;
+          }
+          sendMqttMessage(topic, payload);
+        });
+      }
+
+      function sendDatabaseRequest(topic, timeSpan = "today") {
+        var isValidTimeSpan = [
+          "today",
+          "lastDay",
+          "lastWeek",
+          "lastMonth",
+          "allTime",
+        ].includes(timeSpan);
+
+        if (!isValidTimeSpan && !isValidDateString(timeSpan)) {
+          console.error("Invalid timeSpan value:", timeSpan);
+          return;
+        }
+        var requestData = {
+          type: "database_request",
+          data: {
+            topic: topic,
+            timeSpan: timeSpan,
+          },
+        };
+        var jsonRequestData = JSON.stringify(requestData);
+        socket.send(jsonRequestData);
+      }
+
+      // Function to check if a string is a valid date in the format "YYYY-MM-DD"
+      function isValidDateString(dateString) {
+        var dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        return dateRegex.test(dateString);
+      }
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileIcon = document.getElementById("profile-icon");
+        const profileWindow = document.getElementById("profile-window");
+        const logoutBtn = document.getElementById("logout-btn");
+        const notificationIcon = document.getElementById("notification-icon");
+        const notificationWindow = document.getElementById(
+          "notification-window"
+        );
+        const cleanNotificationBtn = document.getElementById(
+          "clean-notifications-btn"
+        );
+        const notificationContainer = document.getElementById(
+          "notification-message-container"
+        );
+        const noNotificationMessage = document.getElementById(
+          "no-notification-message"
+        );
+
+        cleanNotificationBtn.addEventListener("click", function () {
+          // Empty the notification message container
+          notificationContainer.innerHTML = "";
+
+          // Show the "Nema obavjesti" message if there are no notifications
+          noNotificationMessage.style.display = "block";
+        });
+
+        let isProfileWindowVisible = false;
+        let isNotificationWindowVisible = false;
+        // Show/hide profile window when the profile icon is clicked
+        profileIcon.addEventListener("click", function () {
+          if (isProfileWindowVisible) {
+            profileWindow.style.display = "none";
+          } else {
+            profileWindow.style.display = "flex";
+          }
+          // Toggle the state
+          isProfileWindowVisible = !isProfileWindowVisible;
+        });
+        // Show profile window when the profile icon is clicked
+        notificationIcon.addEventListener("click", function () {
+          if (isNotificationWindowVisible) {
+            notificationWindow.style.display = "none";
+            noNotificationMessage.style.display = "none";
+          } else {
+            notificationIcon.src =
+              "https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fnotification_default.png?alt=media&token=bce64cda-b93e-456b-8a05-15d55cd61dcc";
+            notificationWindow.style.display = "flex";
+            if (notificationContainer.innerHTML.trim() === "") {
+              noNotificationMessage.style.display = "block";
+            }
+          }
+          // Toggle the state
+          isNotificationWindowVisible = !isNotificationWindowVisible;
+        });
+
+        // Hide profile window when clicking outside of it
+        document.addEventListener("click", function (event) {
+          if (
+            !profileIcon.contains(event.target) &&
+            !profileWindow.contains(event.target)
+          ) {
+            profileWindow.style.display = "none";
+            isProfileWindowVisible = false;
+          }
+        });
+
+        document.addEventListener("click", function (event) {
+          if (
+            !notificationIcon.contains(event.target) &&
+            !notificationWindow.contains(event.target)
+          ) {
+            notificationWindow.style.display = "none";
+            noNotificationMessage.style.display = "none";
+            isNotificationWindowVisible = false;
+          }
+        });
+
+        // Logout button functionality
+        logoutBtn.addEventListener("click", function () {
+          // Add your logout logic here
+          //alert("Logout clicked!");
+          var userId = "{{ userId }}";
+          console.log(userId);
+          var logoutData = {
+            type: "logout_command",
+            data: {
+              id: `${userId}`,
+            },
+          };
+
+          // Convert JSON object to string
+          var logoutJsonData = JSON.stringify(logoutData);
+          socket.send(logoutJsonData);
+        });
+      });
+    </script>
+
+    <script>
+      let toggleFanSwitch = document.querySelector("#toggle-fan-status-switch");
+      let fanStatusMessage = document.querySelector("#fan-status-msg");
+      let toggleFurnace = document.querySelector(
+        "#toggle-furnace-status-switch"
+      );
+      let furnaceImgOn = document.querySelector("#furnace-img-on");
+      let furnaceImgOff = document.querySelector("#furnace-img-off");
+      let furnaceStatusMessage = document.querySelector("#furnace-status-msg");
+      let toggleWindow = document.querySelector("#toggle-window-status-switch");
+      let windowOpenImg = document.querySelector("#windows-open-img");
+      let windowsClosedImg = document.querySelector("#windows-closed-img");
+      let windowStatusMessage = document.querySelector("#widndow-status-msg");
+      let systemWindowComponent = document.querySelector(
+        "#system-window-component"
+      );
+      let toggleBlinds = document.querySelector("#toggle-blinds-status-switch");
+      let editWindowComponetValueBtn = document.querySelector(
+        "#edit-window-componet-value-img"
+      );
+      let widndowStatusValue = document.querySelector("#widndow-status-value");
+      let blindsOpenImg = document.querySelector("#blinds-open-img");
+      let blindsClosedImg = document.querySelector("#blinds-closed-img");
+      let blindsStatusMessage = document.querySelector("#blinds-status-msg");
+      let systemBlindsComponent = document.querySelector(
+        "#system-blinds-component"
+      );
+      let editBlindsComponetValueBtn = document.querySelector(
+        "#edit-blinds-componet-value-img"
+      );
+      let blindsStatusValue = document.querySelector(
+        "#blinds-status-open-value"
+      );
+      let temperatureSettingsValue = document.querySelector(
+        "#temperature-setting-value"
+      );
+      let temperatureSettingsValueEditBtn = document.querySelector(
+        "#edit-temperature-setting-value-img"
+      );
+      let humiditySettingsValue = document.querySelector(
+        "#humidity-setting-value"
+      );
+      let humiditySettingsValueEditBtn = document.querySelector(
+        "#edit-humidity-setting-value-img"
+      );
+      let lightSettingsValue = document.querySelector("#light-setting-value");
+      let lightSettingsValueEditBtn = document.querySelector(
+        "#edit-light-setting-value-img"
+      );
+
+      //Handle toggle buttons with ON and OFF values
+      toggleFanSwitch.addEventListener("change", function () {
+        let payload;
+        if (this.checked) {
+          payload = "ON";
+        } else {
+          payload = "OFF";
+        }
+        sendMqttMessage("status/ventilator", payload);
+      });
+      toggleFurnace.addEventListener("change", function () {
+        let payload;
+        if (this.checked) {
+          payload = "ON";
+        } else {
+          payload = "OFF";
+        }
+        sendMqttMessage("status/furnace", payload);
+      });
+
+      //Handle toggle buttons with values
+      toggleWindow.addEventListener("change", function () {
+        let payloadChechedValue = widndowStatusValue.value.replace("%", "");
+        let payload;
+        if (this.checked) {
+          payload = payloadChechedValue;
+        } else {
+          payload = 0;
+        }
+        sendMqttMessage("status/window", payload);
+      });
+      toggleBlinds.addEventListener("change", function () {
+        let payloadChechedValue = blindsStatusValue.value.replace("%", "");
+        let payload;
+        if (this.checked) {
+          payload = payloadChechedValue;
+        } else {
+          payload = 0;
+        }
+        sendMqttMessage("status/blinds", payload);
+      });
+
+      const animationDuration = 400;
+      if (toggleWindow.checked) {
+        systemWindowComponent.style.opacity = "1";
+        windowOpenImg.style.opacity = "1";
+        windowsClosedImg.style.opacity = "0";
+        windowOpenImg.style.display = "block";
+        windowsClosedImg.style.display = "none";
+        windowStatusMessage.innerHTML = "Prostorija je otvorena";
+      } else {
+        systemWindowComponent.style.opacity = "0";
+        windowOpenImg.style.opacity = "0";
+        windowsClosedImg.style.opacity = "1";
+        windowOpenImg.style.display = "none";
+        windowsClosedImg.style.display = "block";
+        windowStatusMessage.innerHTML = "Prostorija je zatvorena";
+      }
+
+      if (toggleBlinds.checked) {
+        systemBlindsComponent.style.opacity = "1";
+        blindsOpenImg.style.opacity = "1";
+        blindsClosedImg.style.opacity = "0";
+        blindsOpenImg.style.display = "block";
+        blindsClosedImg.style.display = "none";
+        blindsStatusMessage.innerHTML = "Roletne su podignute";
+      } else {
+        systemBlindsComponent.style.opacity = "0";
+        blindsOpenImg.style.opacity = "0";
+        blindsClosedImg.style.opacity = "1";
+        blindsOpenImg.style.display = "none";
+        blindsClosedImg.style.display = "block";
+        blindsStatusMessage.innerHTML = "Roletne su spuštene";
+      }
+
+      widndowStatusValue.disabled = true;
+      blindsStatusValue.disabled = true;
+      temperatureSettingsValue.disabled = true;
+      humiditySettingsValue.disabled = true;
+      lightSettingsValue.disabled = true;
+
+      function changeImges(imageOn, imageOff, checkbox) {
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            // Fade in
+            imageOn.style.opacity = "0";
+            imageOff.style.opacity = "1";
+            imageOn.style.display = "block";
+            imageOff.style.display = "none";
+            setTimeout(() => {
+              imageOn.style.opacity = "1";
+              imageOff.style.opacity = "0";
+            }, animationDuration);
+          } else {
+            // Fade out
+            imageOff.style.opacity = "0";
+            imageOn.style.opacity = "1";
+            imageOn.style.display = "none";
+            imageOff.style.display = "block";
+            setTimeout(() => {
+              imageOff.style.opacity = "1";
+              imageOn.style.opacity = "0";
+            }, animationDuration);
+          }
+        });
+      }
+
+      function changeText(textElement, turnOnText, turnOffText, checkbox) {
+        checkbox.addEventListener("change", function () {
+          const newText = this.checked ? turnOnText : turnOffText;
+          textElement.style.opacity = "0";
+          setTimeout(() => {
+            textElement.innerHTML = newText;
+            textElement.style.opacity = "1";
+          }, 400);
+        });
+      }
+
+      function displaySystemComponentValue(systemComponent, checkbox) {
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            systemComponent.style.opacity = "1";
+          } else {
+            systemComponent.style.opacity = "0";
+          }
+        });
+      }
+      function editComponentValue(
+        statusValueInput,
+        editBtn,
+        topic,
+        editPercentage = true,
+        isSettingsEdit = false
+      ) {
+        let prevValue = statusValueInput.value;
+        editBtn.addEventListener("click", function () {
+          let tempValue = statusValueInput.value;
+          tempValue = tempValue.replace(editPercentage ? "%" : " °C", "");
+          if (statusValueInput.disabled === true) {
+            statusValueInput.disabled = false;
+            statusValueInput.focus();
+            statusValueInput.value = tempValue;
+            prevValue = parseFloat(tempValue);
+            editBtn.src =
+              "https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fsave-value-icon.svg?alt=media&token=8dc1eb2e-f39e-4945-8b5e-542e9a76c321";
+          } else {
+            statusValueInput.style.borderBottom = "none";
+            statusValueInput.addEventListener("focus", function () {
+              statusValueInput.style.borderBottom = "1px solid #707974";
+            });
+            value = parseFloat(tempValue);
+            let minValue = editPercentage ? 0 : -10;
+            let maxValue = editPercentage ? 100 : 60;
+            if (isNaN(value) || value < minValue || value > maxValue) {
+              statusValueInput.style.borderBottom = "2px solid red";
+              statusValueInput.disabled = false;
+              return;
+            }
+            statusValueInput.disabled = true;
+            editBtn.src =
+              "https://firebasestorage.googleapis.com/v0/b/smart-greenhouse-fc3b4.appspot.com/o/images%2Fedit-system-componet-value-icon.svg?alt=media&token=e1f4f70b-de0b-4691-9513-0c124574082d";
+            if (prevValue !== value) {
+              if (isSettingsEdit) {
+                sendSettingsMessage(topic, value);
+              } else {
+                sendMqttMessage(topic, value);
+              }
+            }
+            let suffix = editPercentage ? "%" : " °C";
+            statusValueInput.value = tempValue + suffix;
+          }
+        });
+      }
+
+      function sendInitialInputValueFromToggleBtn(
+        inputId,
+        topic,
+        payloadCheckedValue,
+        payloadUncheckedValue
+      ) {
+        let input = document.getElementById(inputId);
+        let payload;
+        if (input.checked) {
+          payload = payloadCheckedValue;
+        } else {
+          payload = payloadUncheckedValue;
+        }
+        sendMqttMessage(topic, payload);
+      }
+
+      function sendInitialInputValue(input, topic, editPercentage = true) {
+        let tempValue = input.value;
+        let value = tempValue.replace(editPercentage ? "%" : " °C", "");
+        sendSettingsMessage(topic, value);
+      }
+
+      function setDateInputToDefaultSettings(inputId) {
+        const currentDate = new Date().toISOString().split("T")[0];
+        const dateInput = document.getElementById(inputId);
+        dateInput.max = currentDate;
+        dateInput.value = currentDate;
+      }
+
+      function onPageLoad() {
+        setDateInputToDefaultSettings("specific-date");
+        sendInitialInputValueFromToggleBtn(
+          "toggle-fan-status-switch",
+          "status/ventilator",
+          "ON",
+          "OFF"
+        );
+        sendInitialInputValueFromToggleBtn(
+          "toggle-furnace-status-switch",
+          "status/furnace",
+          "ON",
+          "OFF"
+        );
+        sendInitialInputValueFromToggleBtn(
+          "toggle-window-status-switch",
+          "status/window",
+          "0",
+          widndowStatusValue.value.replace("%", "")
+        );
+        sendInitialInputValueFromToggleBtn(
+          "toggle-blinds-status-switch",
+          "status",
+          "0",
+          blindsStatusValue.value.replace("%", "")
+        );
+        sendInitialInputValue(temperatureSettingsValue, "temperature", false);
+        sendInitialInputValue(humiditySettingsValue, "humidity");
+        sendInitialInputValue(lightSettingsValue, "light");
+      }
+
+      window.onload = onPageLoad;
+
+      changeText(
+        fanStatusMessage,
+        "Ventolator uključen",
+        "Ventolator isključen",
+        toggleFanSwitch
+      );
+      changeImges(furnaceImgOn, furnaceImgOff, toggleFurnace);
+      changeText(
+        furnaceStatusMessage,
+        "Peć je upaljena",
+        "Peć je isključena",
+        toggleFurnace
+      );
+      changeImges(windowOpenImg, windowsClosedImg, toggleWindow);
+      changeText(
+        windowStatusMessage,
+        "Prostorija je otvorena",
+        "Prostorija je zatvorena",
+        toggleWindow
+      );
+      displaySystemComponentValue(systemWindowComponent, toggleWindow);
+      editComponentValue(
+        widndowStatusValue,
+        editWindowComponetValueBtn,
+        "status/window"
+      );
+      changeImges(blindsOpenImg, blindsClosedImg, toggleBlinds);
+      changeText(
+        blindsStatusMessage,
+        "Roletne su podignute",
+        "Roletne su spuštene",
+        toggleBlinds
+      );
+      displaySystemComponentValue(systemBlindsComponent, toggleBlinds);
+      editComponentValue(
+        blindsStatusValue,
+        editBlindsComponetValueBtn,
+        "status/blinds"
+      );
+      editComponentValue(
+        temperatureSettingsValue,
+        temperatureSettingsValueEditBtn,
+        "temperature",
+        false,
+        true
+      );
+      editComponentValue(
+        humiditySettingsValue,
+        humiditySettingsValueEditBtn,
+        "humidity",
+        true,
+        true
+      );
+      editComponentValue(
+        lightSettingsValue,
+        lightSettingsValueEditBtn,
+        "light",
+        true,
+        true
+      );
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var toggleSwitch = document.getElementById("toggle-fan-status-switch");
+        var fanBox = document.querySelector(".fan-box");
+        var fanBox1 = document.querySelector(".fan-box1");
+
+        toggleSwitch.addEventListener("change", function () {
+          if (toggleSwitch.checked) {
+            // Checkbox is checked (fan is ON)
+            fanBox.style.animation = "rotateon 0.8s infinite linear";
+            fanBox1.style.boxShadow = "0px 0px 18px 4px rgb(22, 231, 8)";
+          } else {
+            // Checkbox is unchecked (fan is OFF)
+            fanBox.style.animation = "rotateoff 0.85s ease-out";
+            fanBox1.style.boxShadow = "0px 0px 18px 4px rgb(236, 8, 8)";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
