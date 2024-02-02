@@ -2,7 +2,7 @@
 
 Ovaj programski kod predstavlja dio rješenja projekta "Pametni plastenik s kontorlom razine vlage, temperature i osvjetljenja", koji se odnosit na mrežnu stranicu i poslužiteljsku stranu.
 
-Dio programskog rješenja koji se odnosi na implementaciju na Arduino (Croduinu) uređaju moguće je pristuptit putem sljedeće povezice: https://github.com/teakrcmar/IoT-Smart-Greenhouse.git.
+Dio programskog rješenja koji se odnosi na implementaciju na Arduino (Croduino) uređaju moguće je pristuptit putem sljedeće povezice: https://github.com/teakrcmar/IoT-Smart-Greenhouse.git.
 
 ## Mrežna stranica
 
