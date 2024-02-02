@@ -13,7 +13,7 @@ Mrežna stranica sastoji se od dva web mjesta:
 
 Mjesto za prijavu korisnika odogovara _login.html_ datoteki, dok mjesto kontrolne ploče odogovara _dashboard.html_ datoteci.
 
-Rješenje je ostvarneo korištenjem HTML, CSS i JavaScript tehnologija. Budući da je program namijenjen pokretanju na Raspberry Pi uređaju korištenjem WebsSocket protokola sve stilske i skriptne komponete koda su uključene u istu datoteku (nema vanjskog uključivanja stila i skripte). Stranica se pokreće pokretanjem poslužiteljske Python skripte _ws_handle.py_. Nakon pokretanja skripte, odlaskom na adresu http://[IP_adresa_uređaja]:8888 (primjer, http://localhost:8888) otvara se mjesto za prijavu korsnika. Ispravnim unosom korisničkih podataka otvara se mjesto kontrolne ploče. Važno je napomenuti da je u svakoj od datoteka (_login.html_, _dashboard.html_ i _ws_handle.py_) potrebno promijeniti vrijednost varijable "hostname" u IP adresu uređaja koji pokreće _ws_handle.py_ skriptu.
+Rješenje je ostvarneo korištenjem HTML, CSS i JavaScript tehnologija. Budući da je program namijenjen pokretanju na Raspberry Pi uređaju korištenjem WebSocket protokola sve stilske i skriptne komponete koda su uključene u istu datoteku (nema vanjskog uključivanja stila i skripte). Stranica se pokreće pokretanjem poslužiteljske Python skripte _ws_handle.py_. Nakon pokretanja skripte, odlaskom na adresu http://[IP_adresa_uređaja]:8888 (primjer, http://localhost:8888) otvara se mjesto za prijavu korsnika. Ispravnim unosom korisničkih podataka otvara se mjesto kontrolne ploče. Važno je napomenuti da je u svakoj od datoteka (_login.html_, _dashboard.html_ i _ws_handle.py_) potrebno promijeniti vrijednost varijable "hostname" u IP adresu uređaja koji pokreće _ws_handle.py_ skriptu.
 
 ## Poslužitelj
 
