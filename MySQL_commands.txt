@@ -1,0 +1,38 @@
+
+CREATE DATABASE greenhouse;
+
+USE greenhouse;
+
+CREATE TABLE temperature_data (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    date DATE,
+    time TIME,
+    temperature DECIMAL(5, 2)
+);
+
+CREATE TABLE humidity_data (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	date DATE,
+	time TIME,
+	humidity DECIMAL(5, 2)
+);
+
+CREATE TABLE light_data (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	date DATE,
+	time TIME,
+	light DECIMAL(5, 2)
+);
+
+
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    fullname VARCHAR(255),
+    password VARCHAR(255)
+);
+
+
+INSERT INTO users (username, fullname, password)
+VALUES ('username', 'Name Surname', 'password123');
+
